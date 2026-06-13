@@ -116,8 +116,16 @@ namespace HorseBetting.Core
             _currentHorses = null;
             _currentOdds = null;
             _lastRaceResult = default;
+
+            // Reset all systems for new round
+            _gameEngine.HorseSystem.Reset();
+            _gameEngine.MessageCardSystem.Reset();
+            _gameEngine.OddsSystem.Reset();
+            _gameEngine.TrackSystem.Reset();
+            _gameEngine.AnalystSystem.Reset();
             _gameEngine.BettingSystem.ClearBets();
             _gameEngine.PlayerState.ClearBets();
+
             _mainView?.UpdateRound(roundNumber);
             _mainView?.UpdateBalance(_gameEngine.PlayerState.Balance);
             Debug.Log($"[GameBootstrap] Round {roundNumber} started.");
