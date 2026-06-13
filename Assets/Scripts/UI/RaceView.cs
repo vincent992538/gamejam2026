@@ -153,7 +153,10 @@ namespace HorseBetting.UI
         /// <param name="result">The race result containing final speeds and stage events</param>
         public void StartRaceAnimation(RaceResult result)
         {
-            if (_isAnimating) return;
+            if (_isAnimating)
+            {
+                StopAnimation(); // stop any previous animation
+            }
             if (result.finalSpeeds == null || result.finalSpeeds.Length == 0) return;
 
             // Ensure horses are initialized
@@ -172,59 +175,78 @@ namespace HorseBetting.UI
         }
 
         /// <summary>
-        /// Coroutine that animates the race over the configured duration.
-        /// Horse positions interpolate based on speed ratios (faster = arrives earlier).
-        /// Stage events are shown as notifications at 1/3 and 2/3 progress marks.
+        /// Coroutine that animates the race.
+        /// ALL horses run to the finish line. Faster horses arrive first.
+        /// The fastest horse finishes at _raceDuration, slowest finishes later.
         /// </summary>
         private IEnumerator AnimateRace(RaceResult result)
         {
             int horseCount = Mathf.Min(result.finalSpeeds.Length, _horses.Length);
 
-            // Find max speed to calculate relative progress ratios
+            // Find max and min speed
             int maxSpeed = int.MinValue;
+            int minSpeed = int.MaxValue;
             for (int i = 0; i < horseCount; i++)
             {
-                if (result.finalSpeeds[i] > maxSpeed)
-                    maxSpeed = result.finalSpeeds[i];
+                if (result.finalSpeeds[i] > maxSpeed) maxSpeed = result.finalSpeeds[i];
+                if (result.finalSpeeds[i] < minSpeed) minSpeed = result.finalSpeeds[i];
+            }
+            if (maxSpeed <= 0) maxSpeed = 1;
+            if (minSpeed <= 0) minSpeed = 1;
+
+            // Calculate finish time for each horse
+            // Fastest horse finishes at _raceDuration, slowest at _raceDuration * 1.5
+            float[] finishTimes = new float[horseCount];
+            for (int i = 0; i < horseCount; i++)
+            {
+                float speedRatio = (float)result.finalSpeeds[i] / maxSpeed;
+                // Invert: higher speed = shorter time
+                finishTimes[i] = _raceDuration / Mathf.Max(speedRatio, 0.5f);
             }
 
-            // Prevent division by zero
-            if (maxSpeed <= 0) maxSpeed = 1;
-
-            // Calculate speed ratios: each horse's speed relative to the maximum
-            float[] speedRatios = new float[horseCount];
+            // Total animation runs until slowest horse finishes
+            float maxFinishTime = 0f;
             for (int i = 0; i < horseCount; i++)
             {
-                // Ratio ranges from ~0.5 to 1.0 so all horses visibly move
-                speedRatios[i] = Mathf.Clamp(result.finalSpeeds[i] / (float)maxSpeed, 0.4f, 1.0f);
+                if (finishTimes[i] > maxFinishTime) maxFinishTime = finishTimes[i];
             }
 
             float totalDistance = _finishX - _startX;
+            bool[] hasFinished = new bool[horseCount];
+            int finishedCount = 0;
 
-            // Track which stage events have been shown
+            // Track stage event notifications
             bool[] stageNotified = new bool[3];
-            float[] stageThresholds = { 0.33f, 0.66f, 0.95f };
+            float[] stageThresholds = { 0.33f, 0.66f, 0.90f };
 
             float elapsed = 0f;
 
-            while (elapsed < _raceDuration)
+            while (finishedCount < horseCount)
             {
                 elapsed += Time.deltaTime;
-                float progress = Mathf.Clamp01(elapsed / _raceDuration);
+                float overallProgress = Mathf.Clamp01(elapsed / maxFinishTime);
 
-                // Update each horse position
                 for (int i = 0; i < horseCount; i++)
                 {
-                    // Use eased progress with speed ratio
-                    float horseProgress = progress * speedRatios[i];
+                    if (hasFinished[i]) continue;
+
+                    float horseProgress = Mathf.Clamp01(elapsed / finishTimes[i]);
                     float x = _startX + horseProgress * totalDistance;
                     _horses[i].SetHorizontalPosition(x);
+
+                    // Check if this horse just crossed the finish line
+                    if (horseProgress >= 1f)
+                    {
+                        hasFinished[i] = true;
+                        finishedCount++;
+                        _horses[i].SetHorizontalPosition(_finishX);
+                    }
                 }
 
-                // Show stage event notifications at threshold points
+                // Show stage event notifications
                 for (int stage = 0; stage < 3; stage++)
                 {
-                    if (!stageNotified[stage] && progress >= stageThresholds[stage])
+                    if (!stageNotified[stage] && overallProgress >= stageThresholds[stage])
                     {
                         stageNotified[stage] = true;
                         ShowStageEvents(result.stageEvents, stage);
@@ -234,17 +256,10 @@ namespace HorseBetting.UI
                 yield return null;
             }
 
-            // Snap all horses to final positions
-            for (int i = 0; i < horseCount; i++)
-            {
-                float finalX = _startX + speedRatios[i] * totalDistance;
-                _horses[i].SetHorizontalPosition(finalX);
-            }
-
             _isAnimating = false;
 
-            // Clean up any remaining notifications
-            yield return new WaitForSeconds(1f);
+            // Wait a moment so player can see final positions
+            yield return new WaitForSeconds(1.5f);
             ClearNotifications();
 
             OnRaceComplete?.Invoke();
