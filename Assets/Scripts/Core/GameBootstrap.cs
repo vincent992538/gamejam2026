@@ -415,6 +415,11 @@ namespace HorseBetting.Core
                     break;
                 case RoundStep.RaceAnimation:
                     _uiManager.ShowRaceView();
+                    // Make sure race is simulated first
+                    if (_lastRaceResult.finalSpeeds == null)
+                    {
+                        SimulateRace();
+                    }
                     if (_raceView != null && _lastRaceResult.finalSpeeds != null)
                     {
                         _raceView.StartRaceAnimation(_lastRaceResult);
