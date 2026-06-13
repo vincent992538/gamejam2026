@@ -244,6 +244,12 @@ namespace HorseBetting.Core
             if (_currentHorses == null)
                 _currentHorses = _gameEngine.HorseSystem.GetHorses();
 
+            if (_currentHorses == null)
+            {
+                Debug.LogWarning("[GameBootstrap] Cannot simulate race - no horses generated.");
+                return;
+            }
+
             TrackType track = _gameEngine.TrackSystem.CurrentTrack;
             ProtectionCard[] cards = _gameEngine.PlayerState.ProtectionCards.ToArray();
 
