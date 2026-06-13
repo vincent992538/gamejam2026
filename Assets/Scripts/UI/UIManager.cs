@@ -10,6 +10,7 @@ namespace HorseBetting.UI
     /// Handles user input gates by forwarding view events to AdvanceStep().
     /// Validates: Requirements 1.1, 1.2, 13.1, 13.2, 13.3, 13.4
     /// </summary>
+    [DefaultExecutionOrder(-10)]
     public class UIManager : MonoBehaviour
     {
         // ─── Inspector References ───────────────────────────────────────────────
@@ -240,32 +241,32 @@ namespace HorseBetting.UI
 
         // ─── View Visibility Management ─────────────────────────────────────────
 
-        private void ShowMainView()
+        public void ShowMainView()
         {
             SetViewVisibility(mainVisible: true);
         }
 
-        private void ShowBettingView()
+        public void ShowBettingView()
         {
             SetViewVisibility(bettingVisible: true);
         }
 
-        private void ShowRaceView()
+        public void ShowRaceView()
         {
             SetViewVisibility(raceVisible: true);
         }
 
-        private void ShowSettlementView()
+        public void ShowSettlementView()
         {
             SetViewVisibility(settlementVisible: true);
         }
 
-        private void ShowShopView()
+        public void ShowShopView()
         {
             SetViewVisibility(shopVisible: true);
         }
 
-        private void ShowAnalystView()
+        public void ShowAnalystView()
         {
             SetViewVisibility(analystVisible: true);
         }

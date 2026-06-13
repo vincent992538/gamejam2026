@@ -7,10 +7,9 @@ namespace HorseBetting.Core
     /// <summary>
     /// Bootstrap script that wires GameFlowController to UI views
     /// and starts the game loop. Attach to a GameObject in the scene.
-    /// This bridges the gap between UIManager (view switching) and
-    /// GameFlowController (data binding) by passing view references
-    /// and triggering the first round execution.
+    /// Runs AFTER UIManager (execution order 10) to ensure UI is ready.
     /// </summary>
+    [DefaultExecutionOrder(10)]
     public class GameBootstrap : MonoBehaviour
     {
         [Header("References")]
@@ -142,6 +141,8 @@ namespace HorseBetting.Core
                 if (sm.IsWaitingForInput)
                 {
                     Debug.Log($"[GameBootstrap] Waiting for player input at step: {sm.CurrentStep}");
+                    // Force UIManager to show the correct view for this waiting step
+                    ForceShowViewForCurrentStep(sm.CurrentStep);
                     break;
                 }
 
@@ -156,6 +157,31 @@ namespace HorseBetting.Core
                 }
             }
             _isRunningAutoSteps = false;
+        }
+
+        /// <summary>
+        /// Explicitly tells UIManager which view to show for the current waiting step.
+        /// This ensures the correct view is visible even if event ordering was off.
+        /// </summary>
+        private void ForceShowViewForCurrentStep(RoundStep step)
+        {
+            if (_uiManager == null) return;
+
+            // Use SendMessage to trigger view switch (simple approach)
+            switch (step)
+            {
+                case RoundStep.BettingRound1:
+                case RoundStep.BettingRound2:
+                case RoundStep.BettingRound3:
+                    _uiManager.SendMessage("ShowBettingView", SendMessageOptions.DontRequireReceiver);
+                    break;
+                case RoundStep.BuyAnalyst:
+                    _uiManager.SendMessage("ShowAnalystView", SendMessageOptions.DontRequireReceiver);
+                    break;
+                case RoundStep.Shop:
+                    _uiManager.SendMessage("ShowShopView", SendMessageOptions.DontRequireReceiver);
+                    break;
+            }
         }
 
         /// <summary>
