@@ -84,10 +84,11 @@ namespace HorseBetting.Core
             ProcessStepCompletion(step);
 
             // Only resume after WAITING steps complete (player input steps)
-            // Auto-steps are already handled by RunAutoSteps loop
             if (!_isRunningAutoSteps && IsWaitingStep(step))
             {
-                Invoke(nameof(ResumeAfterInput), 0.05f);
+                // Cancel any pending resume calls to prevent duplicates
+                CancelInvoke(nameof(ResumeAfterInput));
+                Invoke(nameof(ResumeAfterInput), 0.1f);
             }
         }
 
@@ -100,6 +101,12 @@ namespace HorseBetting.Core
                 || step == RoundStep.Shop;
         }
 
+        private void ResumeAfterInput()
+        {
+            if (_isRunningAutoSteps) return; // extra safety
+            RunAutoSteps();
+        }
+
         private void HandleRoundStarted(int roundNumber)
         {
             _currentHorses = null;
@@ -110,11 +117,6 @@ namespace HorseBetting.Core
             _mainView?.UpdateRound(roundNumber);
             _mainView?.UpdateBalance(_gameEngine.PlayerState.Balance);
             Debug.Log($"[GameBootstrap] Round {roundNumber} started.");
-        }
-
-        private void ResumeAfterInput()
-        {
-            RunAutoSteps();
         }
 
         private void RunAutoSteps()
