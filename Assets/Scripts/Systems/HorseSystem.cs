@@ -50,12 +50,16 @@ namespace HorseBetting.Systems
             _horses = new HorseData[count];
             for (int i = 0; i < count; i++)
             {
+                string name = (i < _config.horseNames.Length && !string.IsNullOrEmpty(_config.horseNames[i]))
+                    ? _config.horseNames[i]
+                    : $"Horse {i + 1}";
+
                 _horses[i] = new HorseData
                 {
                     index = i,
                     baseSpeed = _config.baseSpeed,
                     hiddenBonus = bonuses[i],
-                    displayName = $"Horse {i + 1}"
+                    displayName = name
                 };
             }
 
