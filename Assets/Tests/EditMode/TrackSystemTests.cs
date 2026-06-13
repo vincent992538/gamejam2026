@@ -42,7 +42,9 @@ namespace HorseBetting.Tests.EditMode
         {
             TrackType result = _system.SelectTrack();
 
-            Assert.That(result, Is.AnyOf(TrackType.Grass, TrackType.Mud, TrackType.Snow));
+            Assert.IsTrue(
+                result == TrackType.Grass || result == TrackType.Mud || result == TrackType.Snow,
+                $"SelectTrack returned invalid TrackType: {result}");
         }
 
         [Test]
