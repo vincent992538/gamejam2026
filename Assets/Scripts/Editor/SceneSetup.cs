@@ -99,23 +99,14 @@ namespace HorseBetting.Editor
             uiManagerSO.FindProperty("_raceView").objectReferenceValue = raceView;
             uiManagerSO.ApplyModifiedProperties();
 
-            // ─── 5. GameFlowController ──────────────────────────────────────────
-            var flowControllerObj = new GameObject("GameFlowController");
-            var flowController = flowControllerObj.AddComponent<GameFlowController>();
-
-            var flowSO = new SerializedObject(flowController);
-            flowSO.FindProperty("_gameEngine").objectReferenceValue = gameEngine;
-            flowSO.FindProperty("_raceView").objectReferenceValue = raceView;
-            flowSO.ApplyModifiedProperties();
-
-            // ─── 6. GameBootstrap ───────────────────────────────────────────────
+            // ─── 5. GameBootstrap (handles flow + data binding) ─────────────────
             var bootstrapObj = new GameObject("GameBootstrap");
             var bootstrap = bootstrapObj.AddComponent<GameBootstrap>();
 
             var bootstrapSO = new SerializedObject(bootstrap);
             bootstrapSO.FindProperty("_gameEngine").objectReferenceValue = gameEngine;
-            bootstrapSO.FindProperty("_flowController").objectReferenceValue = flowController;
             bootstrapSO.FindProperty("_uiManager").objectReferenceValue = uiManager;
+            bootstrapSO.FindProperty("_raceView").objectReferenceValue = raceView;
             bootstrapSO.ApplyModifiedProperties();
 
             // ─── 7. Camera Setup ────────────────────────────────────────────────
@@ -136,7 +127,6 @@ namespace HorseBetting.Editor
                 "• 5 UI Documents (with PanelSettings)\n" +
                 "• RaceScene (with background)\n" +
                 "• UIManager (wired)\n" +
-                "• GameFlowController (wired)\n" +
                 "• GameBootstrap (wired)\n" +
                 "• Camera (orthographic, size 7)\n\n" +
                 "Press Play to start the game!",
