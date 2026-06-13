@@ -78,6 +78,7 @@ namespace HorseBetting.Core
                     || _currentStep == RoundStep.BettingRound2
                     || _currentStep == RoundStep.BettingRound3
                     || _currentStep == RoundStep.BuyAnalyst
+                    || _currentStep == RoundStep.Settlement
                     || _currentStep == RoundStep.Shop;
             }
         }
@@ -199,7 +200,7 @@ namespace HorseBetting.Core
                     break;
 
                 case RoundStep.Settlement:
-                    CompleteCurrentStep();
+                    // Waiting for player to review results
                     break;
 
                 case RoundStep.Shop:

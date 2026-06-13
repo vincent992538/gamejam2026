@@ -21,6 +21,7 @@ namespace HorseBetting.UI
         [SerializeField] private UIDocument _settlementUIDocument;
         [SerializeField] private UIDocument _shopUIDocument;
         [SerializeField] private UIDocument _analystUIDocument;
+        [SerializeField] private UIDocument _raceResultUIDocument;
 
         [Header("2D Race Scene")]
         [SerializeField] private RaceView _raceView;
@@ -31,6 +32,7 @@ namespace HorseBetting.UI
         private SettlementView _settlementView;
         private ShopView _shopView;
         private AnalystView _analystView;
+        private RaceResultView _raceResultView;
 
         // Public accessors for GameBootstrap/FlowController
         public MainView MainViewCtrl => _mainView;
@@ -38,6 +40,7 @@ namespace HorseBetting.UI
         public SettlementView SettlementViewCtrl => _settlementView;
         public ShopView ShopViewCtrl => _shopView;
         public AnalystView AnalystViewCtrl => _analystView;
+        public RaceResultView RaceResultViewCtrl => _raceResultView;
 
         private void Awake()
         {
@@ -81,6 +84,10 @@ namespace HorseBetting.UI
             _analystView = new AnalystView();
             if (_analystUIDocument != null && _analystUIDocument.rootVisualElement != null)
                 _analystView.Initialize(_analystUIDocument.rootVisualElement);
+
+            _raceResultView = new RaceResultView();
+            if (_raceResultUIDocument != null && _raceResultUIDocument.rootVisualElement != null)
+                _raceResultView.Initialize(_raceResultUIDocument.rootVisualElement);
         }
 
         private void SubscribeToStateMachine()
@@ -163,7 +170,7 @@ namespace HorseBetting.UI
 
                 case RoundStep.FinalRanking:
                 case RoundStep.Settlement:
-                    ShowSettlementView();
+                    ShowRaceResultView();
                     break;
 
                 case RoundStep.Shop:
@@ -207,18 +214,21 @@ namespace HorseBetting.UI
         public void ShowSettlementView() => SetVisibility(settlement: true);
         public void ShowShopView() => SetVisibility(shop: true);
         public void ShowAnalystView() => SetVisibility(analyst: true);
+        public void ShowRaceResultView() => SetVisibility(raceResult: true);
 
         public void HideAllViews() => SetVisibility();
 
         private void SetVisibility(
             bool main = false, bool betting = false, bool race = false,
-            bool settlement = false, bool shop = false, bool analyst = false)
+            bool settlement = false, bool shop = false, bool analyst = false,
+            bool raceResult = false)
         {
             SetDocDisplay(_mainUIDocument, main);
             SetDocDisplay(_bettingUIDocument, betting);
             SetDocDisplay(_settlementUIDocument, settlement);
             SetDocDisplay(_shopUIDocument, shop);
             SetDocDisplay(_analystUIDocument, analyst);
+            SetDocDisplay(_raceResultUIDocument, raceResult);
 
             if (_raceView != null)
                 _raceView.gameObject.SetActive(race);

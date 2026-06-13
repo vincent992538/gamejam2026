@@ -1,0 +1,56 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="RaceResultView.uss" />
+
+    <ui:VisualElement name="race-result-root" class="race-result-root">
+
+        <!-- Title -->
+        <ui:Label name="title-label" text="🏇 Race Results" class="title-label" />
+
+        <!-- Track Info -->
+        <ui:Label name="track-label" text="Track: Grass" class="track-label" />
+
+        <!-- Ranking Table -->
+        <ui:VisualElement name="ranking-section" class="ranking-section">
+            <ui:VisualElement name="ranking-header" class="ranking-row header-row">
+                <ui:Label text="Rank" class="rank-col" />
+                <ui:Label text="Horse" class="horse-col" />
+                <ui:Label text="Speed" class="speed-col" />
+                <ui:Label text="Bonus" class="bonus-col" />
+                <ui:Label text="Track" class="track-col" />
+                <ui:Label text="Events" class="events-col" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ranking-table" class="ranking-table" />
+        </ui:VisualElement>
+
+        <!-- Bet Results -->
+        <ui:VisualElement name="bet-section" class="bet-section">
+            <ui:Label text="Your Bets" class="section-title" />
+            <ui:VisualElement name="bet-results-list" class="bet-results-list" />
+            <ui:Label name="no-bets-label" text="No bets placed this round." class="no-bets-label" />
+        </ui:VisualElement>
+
+        <!-- Summary -->
+        <ui:VisualElement name="summary-section" class="summary-section">
+            <ui:VisualElement class="summary-row">
+                <ui:Label text="Total Winnings:" class="summary-label" />
+                <ui:Label name="winnings-value" text="$0" class="summary-value win-color" />
+            </ui:VisualElement>
+            <ui:VisualElement class="summary-row">
+                <ui:Label text="Total Wagered:" class="summary-label" />
+                <ui:Label name="wagered-value" text="$0" class="summary-value" />
+            </ui:VisualElement>
+            <ui:VisualElement class="summary-row">
+                <ui:Label text="Net Profit:" class="summary-label" />
+                <ui:Label name="net-profit-value" text="$0" class="summary-value" />
+            </ui:VisualElement>
+            <ui:VisualElement class="summary-row">
+                <ui:Label text="Balance:" class="summary-label" />
+                <ui:Label name="balance-value" text="$1000" class="summary-value balance-color" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Continue Button -->
+        <ui:Button name="continue-button" text="Go to Shop" class="continue-button" />
+
+    </ui:VisualElement>
+</ui:UXML>

@@ -60,6 +60,7 @@ namespace HorseBetting.Editor
             var settlementUIObj = CreateUIDocument("SettlementUI", "Assets/UI/SettlementView.uxml", panelSettings);
             var shopUIObj = CreateUIDocument("ShopUI", "Assets/UI/ShopView.uxml", panelSettings);
             var analystUIObj = CreateUIDocument("AnalystUI", "Assets/UI/AnalystView.uxml", panelSettings);
+            var raceResultUIObj = CreateUIDocument("RaceResultUI", "Assets/UI/RaceResultView.uxml", panelSettings);
 
             // ─── 3. RaceScene ───────────────────────────────────────────────────
             var raceSceneObj = new GameObject("RaceScene");
@@ -96,6 +97,7 @@ namespace HorseBetting.Editor
             uiManagerSO.FindProperty("_settlementUIDocument").objectReferenceValue = settlementUIObj.GetComponent<UIDocument>();
             uiManagerSO.FindProperty("_shopUIDocument").objectReferenceValue = shopUIObj.GetComponent<UIDocument>();
             uiManagerSO.FindProperty("_analystUIDocument").objectReferenceValue = analystUIObj.GetComponent<UIDocument>();
+            uiManagerSO.FindProperty("_raceResultUIDocument").objectReferenceValue = raceResultUIObj.GetComponent<UIDocument>();
             uiManagerSO.FindProperty("_raceView").objectReferenceValue = raceView;
             uiManagerSO.ApplyModifiedProperties();
 

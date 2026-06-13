@@ -32,6 +32,7 @@ namespace HorseBetting.Core
         private float[] _currentOdds;
         private RaceResult _lastRaceResult;
         private bool _isRunningAutoSteps;
+        private RaceResultView _raceResultView;
 
         private void Start()
         {
@@ -49,6 +50,7 @@ namespace HorseBetting.Core
                 _settlementView = _uiManager.SettlementViewCtrl;
                 _shopView = _uiManager.ShopViewCtrl;
                 _analystView = _uiManager.AnalystViewCtrl;
+                _raceResultView = _uiManager.RaceResultViewCtrl;
             }
 
             // Subscribe to events
@@ -59,6 +61,7 @@ namespace HorseBetting.Core
             if (_bettingView != null) _bettingView.OnBetPlaced += HandleBetPlaced;
             if (_shopView != null) _shopView.OnBuyClicked += HandleShopBuy;
             if (_analystView != null) _analystView.OnBuyIntelClicked += HandleBuyIntel;
+            if (_raceResultView != null) _raceResultView.OnContinueClicked += HandleRaceResultContinue;
 
             Debug.Log("[GameBootstrap] Initialized and starting game loop.");
             RunAutoSteps();
@@ -98,6 +101,7 @@ namespace HorseBetting.Core
                 || step == RoundStep.BettingRound2
                 || step == RoundStep.BettingRound3
                 || step == RoundStep.BuyAnalyst
+                || step == RoundStep.Settlement
                 || step == RoundStep.Shop;
         }
 
@@ -256,8 +260,13 @@ namespace HorseBetting.Core
 
             Debug.Log($"[GameBootstrap] Settlement: Won=${settlement.totalWinnings} Lost=${settlement.totalLoss} Net=${settlement.netProfit}");
 
-            _settlementView?.ShowResults(_lastRaceResult, settlement, _currentHorses);
-            _mainView?.UpdateBalance(_gameEngine.PlayerState.Balance);
+            // Show in RaceResultView
+            TrackType track = _gameEngine.TrackSystem.CurrentTrack;
+            int balance = _gameEngine.PlayerState.Balance;
+            _raceResultView?.ShowResults(_lastRaceResult, settlement, _currentHorses, track, balance);
+            _uiManager?.ShowRaceResultView();
+
+            _mainView?.UpdateBalance(balance);
         }
 
         // ─── UI Event Handlers ──────────────────────────────────────────────────
@@ -279,6 +288,12 @@ namespace HorseBetting.Core
                 _bettingView?.ShowError(result.errorMessage);
                 Debug.Log($"[GameBootstrap] Bet rejected: {result.errorMessage}");
             }
+        }
+
+        private void HandleRaceResultContinue()
+        {
+            // Player reviewed results, advance to Shop
+            _gameEngine.RoundStateMachine.AdvanceStep();
         }
 
         private void HandleShopBuy(int itemIndex)
@@ -359,6 +374,10 @@ namespace HorseBetting.Core
                     break;
                 case RoundStep.BuyAnalyst:
                     _uiManager.ShowAnalystView();
+                    break;
+                case RoundStep.Settlement:
+                    // Settlement view is shown by CalculateSettlement
+                    CalculateSettlement();
                     break;
                 case RoundStep.Shop:
                     _uiManager.ShowShopView();
