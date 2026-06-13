@@ -115,7 +115,6 @@ namespace HorseBetting.UI
                         if (sprite != null)
                         {
                             avatar.style.backgroundImage = new StyleBackground(sprite);
-                            avatar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
                         }
                         parent.Insert(0, avatar);
                     }

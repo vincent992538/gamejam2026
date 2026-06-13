@@ -106,7 +106,6 @@ namespace HorseBetting.UI
                 if (horseSprite != null)
                 {
                     avatar.style.backgroundImage = new StyleBackground(horseSprite);
-                    avatar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
                 }
 
                 row.Add(CreateLabel(medal, "rank-col"));

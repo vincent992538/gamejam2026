@@ -111,7 +111,6 @@ namespace HorseBetting.UI
                     {
                         _horseToggles[i].style.backgroundImage = new StyleBackground(sprite);
                         _horseToggles[i].style.height = 50;
-                        _horseToggles[i].style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
                     }
                 }
             }
