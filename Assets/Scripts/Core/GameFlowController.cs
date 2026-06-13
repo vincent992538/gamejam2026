@@ -12,6 +12,7 @@ namespace HorseBetting.Core
     /// fetching system data on each step and pushing it to the appropriate view.
     /// Validates: Requirements 13.1, 13.2, 13.3, 13.4
     /// </summary>
+    [DefaultExecutionOrder(-5)]
     public class GameFlowController : MonoBehaviour
     {
         // ─── References (Inspector-injected) ────────────────────────────────────
@@ -304,7 +305,7 @@ namespace HorseBetting.Core
 
         private void OnGenerateHorsesCompleted()
         {
-            _currentHorses = _gameEngine.HorseSystem.GenerateHorses();
+            _currentHorses = _gameEngine.HorseSystem.GetHorses();
 
             // Push horse data to MainView (without odds yet)
             if (_mainView != null && _currentHorses != null)
@@ -369,7 +370,10 @@ namespace HorseBetting.Core
 
         private void OnStartRaceCompleted()
         {
-            if (_currentHorses == null) return;
+            if (_currentHorses == null)
+            {
+                _currentHorses = _gameEngine.HorseSystem.GetHorses();
+            }
 
             // Simulate the race
             TrackType track = _gameEngine.TrackSystem.CurrentTrack;
@@ -382,13 +386,25 @@ namespace HorseBetting.Core
                 playerCards
             );
 
+            Debug.Log($"[GameFlowController] Race simulated. Winner: Horse {_lastRaceResult.finalRanking[0] + 1}");
+
             // Start race animation
             _raceView?.StartRaceAnimation(_lastRaceResult);
         }
 
         private void OnSettlementCompleted()
         {
-            if (_lastRaceResult.finalRanking == null) return;
+            // Ensure we have horses cached
+            if (_currentHorses == null)
+            {
+                _currentHorses = _gameEngine.HorseSystem.GetHorses();
+            }
+
+            if (_lastRaceResult.finalRanking == null)
+            {
+                Debug.LogWarning("[GameFlowController] Settlement called but no race result available.");
+                return;
+            }
 
             // Get active bets
             Bet[] activeBets = _gameEngine.BettingSystem.GetActiveBets();
@@ -405,6 +421,8 @@ namespace HorseBetting.Core
             {
                 _gameEngine.PlayerState.AddBalance(settlement.totalWinnings);
             }
+
+            Debug.Log($"[GameFlowController] Settlement: Winnings={settlement.totalWinnings}, Loss={settlement.totalLoss}, Net={settlement.netProfit}");
 
             // Show settlement results in SettlementView
             _settlementView?.ShowResults(_lastRaceResult, settlement, _currentHorses);
