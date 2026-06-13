@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using HorseBetting.UI;
 
 namespace HorseBetting.Core
@@ -17,13 +16,6 @@ namespace HorseBetting.Core
         [SerializeField] private GameFlowController _flowController;
         [SerializeField] private UIManager _uiManager;
 
-        [Header("UI Documents")]
-        [SerializeField] private UIDocument _mainUIDocument;
-        [SerializeField] private UIDocument _bettingUIDocument;
-        [SerializeField] private UIDocument _settlementUIDocument;
-        [SerializeField] private UIDocument _shopUIDocument;
-        [SerializeField] private UIDocument _analystUIDocument;
-
         private void Start()
         {
             if (_gameEngine == null || _flowController == null)
@@ -32,7 +24,7 @@ namespace HorseBetting.Core
                 return;
             }
 
-            // Create and wire UI view controllers to GameFlowController
+            // Wire views from UIManager to FlowController
             WireViewsToFlowController();
 
             // Subscribe to state machine step completed to resume after player input
@@ -73,57 +65,18 @@ namespace HorseBetting.Core
 
         private void WireViewsToFlowController()
         {
-            // Temporarily enable all UIDocuments to access rootVisualElement
-            EnableAllDocuments(true);
-
-            // Create view controllers and initialize them with UIDocument roots
-            if (_mainUIDocument != null && _mainUIDocument.rootVisualElement != null)
+            if (_uiManager == null)
             {
-                var mainView = new MainView();
-                mainView.Initialize(_mainUIDocument.rootVisualElement);
-                _flowController.SetMainView(mainView);
+                Debug.LogWarning("[GameBootstrap] UIManager not assigned, views won't be wired to flow controller.");
+                return;
             }
 
-            if (_bettingUIDocument != null && _bettingUIDocument.rootVisualElement != null)
-            {
-                var bettingView = new BettingView();
-                bettingView.Initialize(_bettingUIDocument.rootVisualElement);
-                _flowController.SetBettingView(bettingView);
-            }
-
-            if (_settlementUIDocument != null && _settlementUIDocument.rootVisualElement != null)
-            {
-                var settlementView = new SettlementView();
-                settlementView.Initialize(_settlementUIDocument.rootVisualElement);
-                _flowController.SetSettlementView(settlementView);
-            }
-
-            if (_shopUIDocument != null && _shopUIDocument.rootVisualElement != null)
-            {
-                var shopView = new ShopView();
-                shopView.Initialize(_shopUIDocument.rootVisualElement);
-                _flowController.SetShopView(shopView);
-            }
-
-            if (_analystUIDocument != null && _analystUIDocument.rootVisualElement != null)
-            {
-                var analystView = new AnalystView();
-                analystView.Initialize(_analystUIDocument.rootVisualElement);
-                _flowController.SetAnalystView(analystView);
-            }
-
-            // Restore: disable all except main (UIManager will handle switching)
-            EnableAllDocuments(false);
-            if (_mainUIDocument != null) _mainUIDocument.enabled = true;
-        }
-
-        private void EnableAllDocuments(bool enabled)
-        {
-            if (_mainUIDocument != null) _mainUIDocument.enabled = enabled;
-            if (_bettingUIDocument != null) _bettingUIDocument.enabled = enabled;
-            if (_settlementUIDocument != null) _settlementUIDocument.enabled = enabled;
-            if (_shopUIDocument != null) _shopUIDocument.enabled = enabled;
-            if (_analystUIDocument != null) _analystUIDocument.enabled = enabled;
+            // Get view controllers from UIManager (already initialized in UIManager.Awake)
+            _flowController.SetMainView(_uiManager.MainViewCtrl);
+            _flowController.SetBettingView(_uiManager.BettingViewCtrl);
+            _flowController.SetSettlementView(_uiManager.SettlementViewCtrl);
+            _flowController.SetShopView(_uiManager.ShopViewCtrl);
+            _flowController.SetAnalystView(_uiManager.AnalystViewCtrl);
         }
 
         /// <summary>

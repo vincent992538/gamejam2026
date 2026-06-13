@@ -116,11 +116,6 @@ namespace HorseBetting.Editor
             bootstrapSO.FindProperty("_gameEngine").objectReferenceValue = gameEngine;
             bootstrapSO.FindProperty("_flowController").objectReferenceValue = flowController;
             bootstrapSO.FindProperty("_uiManager").objectReferenceValue = uiManager;
-            bootstrapSO.FindProperty("_mainUIDocument").objectReferenceValue = mainUIObj.GetComponent<UIDocument>();
-            bootstrapSO.FindProperty("_bettingUIDocument").objectReferenceValue = bettingUIObj.GetComponent<UIDocument>();
-            bootstrapSO.FindProperty("_settlementUIDocument").objectReferenceValue = settlementUIObj.GetComponent<UIDocument>();
-            bootstrapSO.FindProperty("_shopUIDocument").objectReferenceValue = shopUIObj.GetComponent<UIDocument>();
-            bootstrapSO.FindProperty("_analystUIDocument").objectReferenceValue = analystUIObj.GetComponent<UIDocument>();
             bootstrapSO.ApplyModifiedProperties();
 
             // ─── 7. Camera Setup ────────────────────────────────────────────────
