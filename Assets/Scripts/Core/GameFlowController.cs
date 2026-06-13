@@ -125,16 +125,22 @@ namespace HorseBetting.Core
 
         // ─── Lifecycle ──────────────────────────────────────────────────────────
 
-        private void OnEnable()
+        private void Awake()
         {
             if (_gameEngine == null)
             {
                 Debug.LogError("[GameFlowController] GameEngine reference is not set.");
                 return;
             }
+        }
+
+        private void Start()
+        {
+            if (_gameEngine == null) return;
 
             SubscribeToStateMachine();
             SubscribeToRaceView();
+            Debug.Log("[GameFlowController] Subscribed to state machine events.");
         }
 
         private void OnDisable()
