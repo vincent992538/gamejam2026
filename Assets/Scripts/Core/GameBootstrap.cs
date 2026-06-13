@@ -62,6 +62,7 @@ namespace HorseBetting.Core
             if (_shopView != null) _shopView.OnBuyClicked += HandleShopBuy;
             if (_analystView != null) _analystView.OnBuyIntelClicked += HandleBuyIntel;
             if (_raceResultView != null) _raceResultView.OnContinueClicked += HandleRaceResultContinue;
+            if (_raceView != null) _raceView.OnRaceComplete += HandleRaceAnimationComplete;
 
             Debug.Log("[GameBootstrap] Initialized and starting game loop.");
             RunAutoSteps();
@@ -112,7 +113,8 @@ namespace HorseBetting.Core
                 || step == RoundStep.BettingRound3
                 || step == RoundStep.BuyAnalyst
                 || step == RoundStep.Settlement
-                || step == RoundStep.Shop;
+                || step == RoundStep.Shop
+                || step == RoundStep.RaceAnimation;
         }
 
         private void HandleRoundStarted(int roundNumber)
@@ -314,7 +316,14 @@ namespace HorseBetting.Core
 
         private void HandleRaceResultContinue()
         {
-            // Player reviewed results, advance to Shop
+            // Player reviewed results, advance to next round
+            _gameEngine.RoundStateMachine.AdvanceStep();
+        }
+
+        private void HandleRaceAnimationComplete()
+        {
+            // Race animation finished, advance past RaceAnimation step
+            Debug.Log("[GameBootstrap] Race animation complete, advancing to results.");
             _gameEngine.RoundStateMachine.AdvanceStep();
         }
 
@@ -398,12 +407,18 @@ namespace HorseBetting.Core
                     _uiManager.ShowAnalystView();
                     break;
                 case RoundStep.Settlement:
-                    // Settlement view is shown by CalculateSettlement
                     CalculateSettlement();
                     break;
                 case RoundStep.Shop:
                     _uiManager.ShowShopView();
                     PushShopData();
+                    break;
+                case RoundStep.RaceAnimation:
+                    _uiManager.ShowRaceView();
+                    if (_raceView != null && _lastRaceResult.finalSpeeds != null)
+                    {
+                        _raceView.StartRaceAnimation(_lastRaceResult);
+                    }
                     break;
             }
         }

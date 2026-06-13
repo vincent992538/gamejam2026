@@ -79,7 +79,8 @@ namespace HorseBetting.Core
                     || _currentStep == RoundStep.BettingRound3
                     || _currentStep == RoundStep.BuyAnalyst
                     || _currentStep == RoundStep.Settlement
-                    || _currentStep == RoundStep.Shop;
+                    || _currentStep == RoundStep.Shop
+                    || _currentStep == RoundStep.RaceAnimation;
             }
         }
 
@@ -189,8 +190,7 @@ namespace HorseBetting.Core
                     break;
 
                 case RoundStep.RaceAnimation:
-                    // Animation plays — for now completes immediately; UI can delay AdvanceStep
-                    CompleteCurrentStep();
+                    // Waiting for animation to complete (RaceView.OnRaceComplete will advance)
                     break;
 
                 case RoundStep.StageEvents:

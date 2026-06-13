@@ -72,7 +72,17 @@ namespace HorseBetting.UI
 
         private void Awake()
         {
-            InitializeHorses();
+            // Don't initialize here - will be done on first StartRaceAnimation call
+            // because this GO might start disabled
+        }
+
+        private void OnEnable()
+        {
+            // Initialize horses when first enabled (if not already done)
+            if (_horses == null)
+            {
+                InitializeHorses();
+            }
         }
 
         /// <summary>
@@ -145,6 +155,10 @@ namespace HorseBetting.UI
         {
             if (_isAnimating) return;
             if (result.finalSpeeds == null || result.finalSpeeds.Length == 0) return;
+
+            // Ensure horses are initialized
+            if (_horses == null)
+                InitializeHorses();
 
             _isAnimating = true;
 
