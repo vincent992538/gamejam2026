@@ -170,13 +170,17 @@ namespace HorseBetting.Core
             {
                 case RoundStep.GenerateHorses:
                     _currentHorses = _gameEngine.HorseSystem.GetHorses();
-                    _mainView?.UpdateHorseList(_currentHorses, new float[8]);
+                    if (_currentHorses != null)
+                        _mainView?.UpdateHorseList(_currentHorses, new float[8]);
                     break;
 
                 case RoundStep.CalculateInitialOdds:
                     if (_currentHorses == null) _currentHorses = _gameEngine.HorseSystem.GetHorses();
-                    _currentOdds = _gameEngine.OddsSystem.CalculateOdds(_currentHorses, 1);
-                    _mainView?.UpdateHorseList(_currentHorses, _currentOdds);
+                    if (_currentHorses != null)
+                    {
+                        _currentOdds = _gameEngine.OddsSystem.CalculateOdds(_currentHorses, 1);
+                        _mainView?.UpdateHorseList(_currentHorses, _currentOdds);
+                    }
                     break;
 
                 case RoundStep.RevealCard1:
