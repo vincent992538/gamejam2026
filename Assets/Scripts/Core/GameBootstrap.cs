@@ -121,6 +121,7 @@ namespace HorseBetting.Core
 
         private void RunAutoSteps()
         {
+            if (_isRunningAutoSteps) return; // prevent re-entry
             _isRunningAutoSteps = true;
             var sm = _gameEngine.RoundStateMachine;
             int safetyCounter = 0;

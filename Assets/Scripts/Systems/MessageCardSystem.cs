@@ -54,7 +54,10 @@ namespace HorseBetting.Systems
         public MessageCard RevealNextCard()
         {
             if (_cards == null || GetRemainingCardCount() == 0)
-                throw new InvalidOperationException("No cards remaining to reveal.");
+            {
+                // Gracefully handle - return empty card instead of throwing
+                return new MessageCard { horseIndex = -1, description = "" };
+            }
 
             // Collect indices of unrevealed cards
             List<int> unrevealed = new List<int>();
