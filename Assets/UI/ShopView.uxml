@@ -31,8 +31,8 @@
         <!-- Error Message -->
         <ui:Label name="shop-error-message" text="" class="shop-error-message hidden" />
 
-        <!-- Start Next Round Button -->
-        <ui:Button name="start-next-round-button" text="Start Next Round" class="start-next-round-button" />
+        <!-- Start Race Button -->
+        <ui:Button name="start-next-round-button" text="Start Race" class="start-next-round-button" />
 
     </ui:VisualElement>
 </ui:UXML>

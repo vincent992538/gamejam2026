@@ -50,7 +50,7 @@
         </ui:VisualElement>
 
         <!-- Continue Button -->
-        <ui:Button name="continue-button" text="Go to Shop" class="continue-button" />
+        <ui:Button name="continue-button" text="Next Round" class="continue-button" />
 
     </ui:VisualElement>
 </ui:UXML>

@@ -23,13 +23,13 @@ namespace HorseBetting.Core
         GenerateAnalystIntel = 10,
         BuyAnalyst = 11,
         BettingRound3 = 12,
-        StartRace = 13,
-        RevealTrack = 14,
-        RaceAnimation = 15,
-        StageEvents = 16,
-        FinalRanking = 17,
-        Settlement = 18,
-        Shop = 19,
+        Shop = 13,
+        StartRace = 14,
+        RevealTrack = 15,
+        RaceAnimation = 16,
+        StageEvents = 17,
+        FinalRanking = 18,
+        Settlement = 19,
         StartNextRound = 20
     }
 
