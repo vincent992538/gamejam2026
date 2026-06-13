@@ -113,12 +113,13 @@ namespace HorseBetting.Core
             switch (_currentStep)
             {
                 case RoundStep.GenerateHorses:
-                    engine.HorseSystem.GenerateHorses();
+                    var horses = engine.HorseSystem.GenerateHorses();
+                    engine.MessageCardSystem.SetHorses(horses);
                     CompleteCurrentStep();
                     break;
 
                 case RoundStep.CalculateInitialOdds:
-                    engine.OddsSystem.CalculateOdds(engine.HorseSystem.GenerateHorses(), 0);
+                    engine.OddsSystem.CalculateOdds(engine.HorseSystem.GetHorses(), 1);
                     CompleteCurrentStep();
                     break;
 
@@ -161,7 +162,7 @@ namespace HorseBetting.Core
                     break;
 
                 case RoundStep.GenerateAnalystIntel:
-                    engine.AnalystSystem.GenerateIntel(engine.HorseSystem.GenerateHorses());
+                    engine.AnalystSystem.GenerateIntel(engine.HorseSystem.GetHorses());
                     CompleteCurrentStep();
                     break;
 

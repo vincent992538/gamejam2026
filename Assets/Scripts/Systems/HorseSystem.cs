@@ -72,5 +72,15 @@ namespace HorseBetting.Systems
 
             return _horses[horseIndex].hiddenBonus;
         }
+
+        /// <summary>
+        /// Returns the most recently generated horses without regenerating.
+        /// </summary>
+        public HorseData[] GetHorses()
+        {
+            if (_horses == null)
+                throw new InvalidOperationException("Horses have not been generated yet. Call GenerateHorses first.");
+            return _horses;
+        }
     }
 }
