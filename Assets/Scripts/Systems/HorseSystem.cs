@@ -79,11 +79,10 @@ namespace HorseBetting.Systems
 
         /// <summary>
         /// Returns the most recently generated horses without regenerating.
+        /// Returns null if horses have not been generated yet.
         /// </summary>
         public HorseData[] GetHorses()
         {
-            if (_horses == null)
-                throw new InvalidOperationException("Horses have not been generated yet. Call GenerateHorses first.");
             return _horses;
         }
     }

@@ -120,7 +120,9 @@ namespace HorseBetting.Core
                     break;
 
                 case RoundStep.CalculateInitialOdds:
-                    engine.OddsSystem.CalculateOdds(engine.HorseSystem.GetHorses(), 1);
+                    var oddsHorses = engine.HorseSystem.GetHorses();
+                    if (oddsHorses != null)
+                        engine.OddsSystem.CalculateOdds(oddsHorses, 1);
                     CompleteCurrentStep();
                     break;
 
@@ -163,7 +165,9 @@ namespace HorseBetting.Core
                     break;
 
                 case RoundStep.GenerateAnalystIntel:
-                    engine.AnalystSystem.GenerateIntel(engine.HorseSystem.GetHorses());
+                    var intelHorses = engine.HorseSystem.GetHorses();
+                    if (intelHorses != null)
+                        engine.AnalystSystem.GenerateIntel(intelHorses);
                     CompleteCurrentStep();
                     break;
 
