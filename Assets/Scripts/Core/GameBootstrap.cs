@@ -415,14 +415,27 @@ namespace HorseBetting.Core
                     break;
                 case RoundStep.RaceAnimation:
                     _uiManager.ShowRaceView();
-                    // Make sure race is simulated first
-                    if (_lastRaceResult.finalSpeeds == null)
+                    // Ensure we have horses and race result for this round
+                    if (_currentHorses == null)
+                        _currentHorses = _gameEngine.HorseSystem.GetHorses();
+                    if (_currentHorses == null)
                     {
-                        SimulateRace();
+                        // Last resort: generate horses now
+                        _currentHorses = _gameEngine.HorseSystem.GenerateHorses();
+                        _gameEngine.MessageCardSystem.SetHorses(_currentHorses);
                     }
+                    // Always simulate fresh for this round
+                    SimulateRace();
                     if (_raceView != null && _lastRaceResult.finalSpeeds != null)
                     {
+                        Debug.Log($"[GameBootstrap] Starting race animation with {_lastRaceResult.finalSpeeds.Length} horses");
                         _raceView.StartRaceAnimation(_lastRaceResult);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[GameBootstrap] Cannot start race animation - no valid result");
+                        // Skip to next step
+                        _gameEngine.RoundStateMachine.AdvanceStep();
                     }
                     break;
             }
