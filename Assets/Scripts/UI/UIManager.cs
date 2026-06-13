@@ -51,7 +51,8 @@ namespace HorseBetting.UI
             SubscribeToStateMachine();
             SubscribeToViewEvents();
 
-            // Show MainView by default at game start
+            // Hide all views first, then show MainView
+            // (all GameObjects must be active during InitializeViews to access rootVisualElement)
             ShowMainView();
         }
 
@@ -271,8 +272,8 @@ namespace HorseBetting.UI
 
         /// <summary>
         /// Toggles visibility of all views. Only the specified view is shown;
-        /// all others are hidden. Uses DisplayStyle.None/Flex for UI Toolkit
-        /// elements and GameObject.SetActive for the 2D RaceView.
+        /// all others are hidden. Uses GameObject.SetActive to fully disable
+        /// UIDocuments that are not needed.
         /// </summary>
         private void SetViewVisibility(
             bool mainVisible = false,
@@ -282,11 +283,11 @@ namespace HorseBetting.UI
             bool shopVisible = false,
             bool analystVisible = false)
         {
-            SetUIDocumentVisible(_mainRoot, mainVisible);
-            SetUIDocumentVisible(_bettingRoot, bettingVisible);
-            SetUIDocumentVisible(_settlementRoot, settlementVisible);
-            SetUIDocumentVisible(_shopRoot, shopVisible);
-            SetUIDocumentVisible(_analystRoot, analystVisible);
+            SetUIDocumentActive(_mainUIDocument, mainVisible);
+            SetUIDocumentActive(_bettingUIDocument, bettingVisible);
+            SetUIDocumentActive(_settlementUIDocument, settlementVisible);
+            SetUIDocumentActive(_shopUIDocument, shopVisible);
+            SetUIDocumentActive(_analystUIDocument, analystVisible);
 
             // RaceView is a MonoBehaviour with its own GameObject
             if (_raceView != null)
@@ -296,12 +297,14 @@ namespace HorseBetting.UI
         }
 
         /// <summary>
-        /// Shows or hides a UI Toolkit root element by toggling its display style.
+        /// Enables or disables a UIDocument's GameObject to fully show/hide it.
         /// </summary>
-        private void SetUIDocumentVisible(VisualElement root, bool visible)
+        private void SetUIDocumentActive(UIDocument doc, bool active)
         {
-            if (root == null) return;
-            root.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+            if (doc != null)
+            {
+                doc.enabled = active;
+            }
         }
     }
 }
