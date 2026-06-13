@@ -82,6 +82,9 @@ namespace HorseBetting.UI
         {
             _horses = new RaceHorseSprite[8];
 
+            // Load horse sprites from Resources
+            Sprite[] horseSprites = HorseBetting.Core.SpriteLoader.LoadAllHorseSprites();
+
             for (int i = 0; i < 8; i++)
             {
                 var horseObj = new GameObject($"Horse_{i + 1}");
@@ -91,9 +94,19 @@ namespace HorseBetting.UI
                 spriteRenderer.sortingOrder = i + 1;
 
                 var horseSprite = horseObj.AddComponent<RaceHorseSprite>();
-                horseSprite.CreatePlaceholderSprite();
+
+                // Use real sprite if available, otherwise placeholder
+                if (horseSprites[i] != null)
+                {
+                    horseSprite.SetupWithSprite(i, i, horseSprites[i], DefaultHorseColors[i]);
+                }
+                else
+                {
+                    horseSprite.CreatePlaceholderSprite();
+                    horseSprite.Setup(i, i, DefaultHorseColors[i], $"Horse {i + 1}");
+                }
+
                 horseSprite.CreateLabel();
-                horseSprite.Setup(i, i, DefaultHorseColors[i], $"Horse {i + 1}");
 
                 // Position at start line
                 horseSprite.SetHorizontalPosition(_startX);
@@ -103,14 +116,23 @@ namespace HorseBetting.UI
         }
 
         /// <summary>
-        /// Set the track type to change the background color/indicator.
+        /// Set the track type to change the background sprite.
         /// </summary>
         /// <param name="trackType">The track type for this race</param>
         public void SetTrackType(TrackType trackType)
         {
-            if (_trackBackground != null && TrackColors.TryGetValue(trackType, out var color))
+            if (_trackBackground != null)
             {
-                _trackBackground.color = color;
+                Sprite trackSprite = HorseBetting.Core.SpriteLoader.LoadTrackSprite(trackType);
+                if (trackSprite != null)
+                {
+                    _trackBackground.sprite = trackSprite;
+                    _trackBackground.color = Color.white;
+                }
+                else if (TrackColors.TryGetValue(trackType, out var color))
+                {
+                    _trackBackground.color = color;
+                }
             }
         }
 

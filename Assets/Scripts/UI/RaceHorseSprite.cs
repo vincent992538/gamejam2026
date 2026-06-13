@@ -54,6 +54,24 @@ namespace HorseBetting.UI
         }
 
         /// <summary>
+        /// Initialize the horse with a loaded sprite asset.
+        /// </summary>
+        public void SetupWithSprite(int horseIndex, int laneIndex, Sprite sprite, Color tintColor)
+        {
+            _horseIndex = horseIndex;
+            _laneIndex = laneIndex;
+
+            if (_spriteRenderer == null)
+                _spriteRenderer = GetComponent<SpriteRenderer>();
+
+            _spriteRenderer.sprite = sprite;
+            _spriteRenderer.color = Color.white; // no tint for real sprites
+            transform.localScale = new Vector3(0.8f, 0.8f, 1f); // scale down to fit lanes
+
+            SetLanePosition(laneIndex);
+        }
+
+        /// <summary>
         /// Set the color of the placeholder sprite.
         /// </summary>
         public void SetColor(Color color)
