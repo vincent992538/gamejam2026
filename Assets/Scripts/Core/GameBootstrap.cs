@@ -36,8 +36,40 @@ namespace HorseBetting.Core
             // Create and wire UI view controllers to GameFlowController
             WireViewsToFlowController();
 
+            // Subscribe to state machine step completed to resume after player input
+            _gameEngine.RoundStateMachine.OnStepCompleted += HandleStepCompleted;
+
             // Start the game loop - execute the first step
             StartGameLoop();
+        }
+
+        private void OnDestroy()
+        {
+            if (_gameEngine != null && _gameEngine.RoundStateMachine != null)
+            {
+                _gameEngine.RoundStateMachine.OnStepCompleted -= HandleStepCompleted;
+            }
+        }
+
+        private bool _isRunningAutoSteps = false;
+
+        /// <summary>
+        /// When a waiting step completes (player pressed Done Betting, Continue, etc.),
+        /// resume auto-executing the next steps.
+        /// </summary>
+        private void HandleStepCompleted(RoundStep step)
+        {
+            // Only resume if we're not already running auto steps
+            // (prevents recursive calls from auto-completing steps)
+            if (!_isRunningAutoSteps)
+            {
+                Invoke(nameof(ResumeAfterInput), 0.05f);
+            }
+        }
+
+        private void ResumeAfterInput()
+        {
+            RunAutoSteps();
         }
 
         private void WireViewsToFlowController()
@@ -95,6 +127,7 @@ namespace HorseBetting.Core
         /// </summary>
         private void RunAutoSteps()
         {
+            _isRunningAutoSteps = true;
             var sm = _gameEngine.RoundStateMachine;
             int safetyCounter = 0;
 
@@ -122,6 +155,7 @@ namespace HorseBetting.Core
                     break;
                 }
             }
+            _isRunningAutoSteps = false;
         }
 
         /// <summary>
