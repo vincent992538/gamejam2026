@@ -98,7 +98,19 @@ namespace HorseBetting.UI
 
                 string medal = rank == 0 ? "🥇" : rank == 1 ? "🥈" : rank == 2 ? "🥉" : $"{rank + 1}";
 
+                // Horse avatar image
+                var avatar = new VisualElement();
+                avatar.style.width = 36;
+                avatar.style.height = 36;
+                var horseSprite = HorseBetting.Core.SpriteLoader.LoadHorseSprite(horseIndex);
+                if (horseSprite != null)
+                {
+                    avatar.style.backgroundImage = new StyleBackground(horseSprite);
+                    avatar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+                }
+
                 row.Add(CreateLabel(medal, "rank-col"));
+                row.Add(avatar);
                 row.Add(CreateLabel(horse.displayName, "horse-col"));
                 row.Add(CreateLabel($"{finalSpeed}", "speed-col"));
                 row.Add(CreateLabel($"+{horse.hiddenBonus}", "bonus-col"));

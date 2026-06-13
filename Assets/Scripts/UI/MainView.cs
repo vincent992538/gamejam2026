@@ -102,6 +102,24 @@ namespace HorseBetting.UI
             {
                 if (_horseNameLabels[i] != null)
                 {
+                    // Add horse avatar before name if not already added
+                    var parent = _horseNameLabels[i].parent;
+                    if (parent != null && parent.Q("horse-avatar-" + i) == null)
+                    {
+                        var avatar = new VisualElement();
+                        avatar.name = "horse-avatar-" + i;
+                        avatar.style.width = 32;
+                        avatar.style.height = 32;
+                        avatar.style.marginRight = 8;
+                        var sprite = HorseBetting.Core.SpriteLoader.LoadHorseSprite(i);
+                        if (sprite != null)
+                        {
+                            avatar.style.backgroundImage = new StyleBackground(sprite);
+                            avatar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+                        }
+                        parent.Insert(0, avatar);
+                    }
+
                     _horseNameLabels[i].text = horses[i].displayName;
                 }
 

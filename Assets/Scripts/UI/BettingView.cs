@@ -94,12 +94,25 @@ namespace HorseBetting.UI
         {
             if (horses == null) return;
 
+            // Load horse sprites for display
             for (int i = 0; i < 8 && i < horses.Length; i++)
             {
                 if (_horseLabels[i] != null)
                 {
                     _horseLabels[i].text = horses[i].displayName;
+                }
+                if (_horseToggles[i] != null)
+                {
                     _horseToggles[i].label = horses[i].displayName;
+
+                    // Add horse sprite as background image on the toggle
+                    var sprite = HorseBetting.Core.SpriteLoader.LoadHorseSprite(i);
+                    if (sprite != null)
+                    {
+                        _horseToggles[i].style.backgroundImage = new StyleBackground(sprite);
+                        _horseToggles[i].style.height = 50;
+                        _horseToggles[i].style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+                    }
                 }
             }
         }
