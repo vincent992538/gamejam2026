@@ -1,0 +1,72 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="SettlementView.uss" />
+
+    <ui:VisualElement name="settlement-root" class="settlement-root">
+
+        <!-- Title -->
+        <ui:Label name="title-label" text="Race Results" class="title-label" />
+
+        <!-- Scrollable content area -->
+        <ui:ScrollView name="content-scroll" class="content-scroll">
+
+            <!-- Final Ranking Table -->
+            <ui:VisualElement name="ranking-section" class="section">
+                <ui:Label text="Final Ranking" class="section-title" />
+                <ui:VisualElement name="ranking-header" class="ranking-row ranking-header-row">
+                    <ui:Label text="#" class="rank-col" />
+                    <ui:Label text="Horse" class="horse-col" />
+                    <ui:Label text="Final Speed" class="speed-col" />
+                </ui:VisualElement>
+                <ui:VisualElement name="ranking-table" class="ranking-table" />
+            </ui:VisualElement>
+
+            <!-- Speed Breakdown Section -->
+            <ui:VisualElement name="speed-breakdown-section" class="section">
+                <ui:Label text="Speed Breakdown" class="section-title" />
+                <ui:VisualElement name="breakdown-header" class="breakdown-row breakdown-header-row">
+                    <ui:Label text="Horse" class="breakdown-horse-col" />
+                    <ui:Label text="Base" class="breakdown-data-col" />
+                    <ui:Label text="Hidden" class="breakdown-data-col" />
+                    <ui:Label text="Track" class="breakdown-data-col" />
+                    <ui:Label text="Events" class="breakdown-data-col" />
+                    <ui:Label text="Total" class="breakdown-data-col" />
+                </ui:VisualElement>
+                <ui:VisualElement name="breakdown-table" class="breakdown-table" />
+            </ui:VisualElement>
+
+            <!-- Bet Results Section -->
+            <ui:VisualElement name="bet-results-section" class="section">
+                <ui:Label text="Bet Results" class="section-title" />
+                <ui:VisualElement name="bet-results-header" class="bet-row bet-header-row">
+                    <ui:Label text="Type" class="bet-type-col" />
+                    <ui:Label text="Amount" class="bet-amount-col" />
+                    <ui:Label text="Result" class="bet-result-col" />
+                    <ui:Label text="Payout" class="bet-payout-col" />
+                </ui:VisualElement>
+                <ui:VisualElement name="bet-results-table" class="bet-results-table" />
+            </ui:VisualElement>
+
+            <!-- Summary Section -->
+            <ui:VisualElement name="summary-section" class="section summary-section">
+                <ui:Label text="Summary" class="section-title" />
+                <ui:VisualElement class="summary-row">
+                    <ui:Label text="Total Winnings:" class="summary-label" />
+                    <ui:Label name="total-winnings-label" text="$0" class="summary-value winnings-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="summary-row">
+                    <ui:Label text="Total Wagered:" class="summary-label" />
+                    <ui:Label name="total-loss-label" text="$0" class="summary-value loss-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="summary-row net-profit-row">
+                    <ui:Label text="Net Profit/Loss:" class="summary-label" />
+                    <ui:Label name="net-profit-label" text="$0" class="summary-value" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+        </ui:ScrollView>
+
+        <!-- Go to Shop Button -->
+        <ui:Button name="go-to-shop-button" text="Go to Shop" class="go-to-shop-button" />
+
+    </ui:VisualElement>
+</ui:UXML>

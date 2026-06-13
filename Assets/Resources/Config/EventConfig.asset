@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe15ad735cd84ad980bfb430eaa16b0, type: 3}
+  m_Name: EventConfig
+  m_EditorClassIdentifier: 
+  events:
+  - eventName: Stumble
+    description: "\u99AC\u5339\u7D46\u5012"
+    triggerChance: 0.15
+    speedModifier: -3
+    targetType: single
+  - eventName: Second Wind
+    description: "\u7206\u767C\u885D\u523A"
+    triggerChance: 0.1
+    speedModifier: 4
+    targetType: single
+  - eventName: Mud Splash
+    description: "\u6CE5\u6F3F\u98DB\u6FFA"
+    triggerChance: 0.2
+    speedModifier: -2
+    targetType: single
+  - eventName: Strong Headwind
+    description: "\u5F37\u52C1\u9006\u98A8"
+    triggerChance: 0.05
+    speedModifier: -1
+    targetType: all

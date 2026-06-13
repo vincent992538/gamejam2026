@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "unity-mcp": {
+      "command": "uvx",
+      "args": [
+        "unity-mcp"
+      ],
+      "disabled": true,
+      "autoApprove": []
+    }
+  }
+}

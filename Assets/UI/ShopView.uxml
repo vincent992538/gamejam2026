@@ -1,0 +1,38 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="ShopView.uss" />
+
+    <ui:VisualElement name="shop-view-root" class="shop-view-root">
+
+        <!-- Header -->
+        <ui:VisualElement name="shop-header" class="shop-header">
+            <ui:Label name="shop-title" text="Shop - Protection Cards" class="shop-title" />
+        </ui:VisualElement>
+
+        <!-- Balance & Card Count HUD -->
+        <ui:VisualElement name="shop-hud" class="shop-hud">
+            <ui:VisualElement name="shop-balance-container" class="shop-hud-item">
+                <ui:Label text="Balance:" class="shop-hud-label" />
+                <ui:Label name="shop-balance-value" text="$1000" class="shop-balance-value" />
+            </ui:VisualElement>
+            <ui:VisualElement name="shop-cards-container" class="shop-hud-item">
+                <ui:Label text="Cards Held:" class="shop-hud-label" />
+                <ui:Label name="shop-cards-count" text="0 / 3" class="shop-cards-count" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Available Items List -->
+        <ui:VisualElement name="shop-items-section" class="shop-section">
+            <ui:Label text="Available Cards" class="shop-section-title" />
+            <ui:VisualElement name="shop-items-list" class="shop-items-list">
+                <!-- Items populated dynamically -->
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Error Message -->
+        <ui:Label name="shop-error-message" text="" class="shop-error-message hidden" />
+
+        <!-- Start Next Round Button -->
+        <ui:Button name="start-next-round-button" text="Start Next Round" class="start-next-round-button" />
+
+    </ui:VisualElement>
+</ui:UXML>

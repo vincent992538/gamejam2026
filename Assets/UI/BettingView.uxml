@@ -1,0 +1,68 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="BettingView.uss" />
+
+    <ui:VisualElement name="betting-root" class="betting-root">
+        <!-- Header: Balance Display -->
+        <ui:VisualElement name="header" class="header">
+            <ui:Label name="balance-label" text="Balance: $1000" class="balance-label" />
+        </ui:VisualElement>
+
+        <!-- Horse Info Section -->
+        <ui:VisualElement name="horse-info-section" class="section">
+            <ui:Label text="Horses" class="section-title" />
+            <ui:VisualElement name="horse-list" class="horse-list">
+                <ui:Label name="horse-0" text="Horse 1" class="horse-item" />
+                <ui:Label name="horse-1" text="Horse 2" class="horse-item" />
+                <ui:Label name="horse-2" text="Horse 3" class="horse-item" />
+                <ui:Label name="horse-3" text="Horse 4" class="horse-item" />
+                <ui:Label name="horse-4" text="Horse 5" class="horse-item" />
+                <ui:Label name="horse-5" text="Horse 6" class="horse-item" />
+                <ui:Label name="horse-6" text="Horse 7" class="horse-item" />
+                <ui:Label name="horse-7" text="Horse 8" class="horse-item" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Revealed Message Cards Section -->
+        <ui:VisualElement name="message-cards-section" class="section">
+            <ui:Label text="Revealed Info Cards" class="section-title" />
+            <ui:VisualElement name="message-cards-list" class="message-cards-list">
+                <!-- Cards will be added dynamically -->
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Bet Type Selector -->
+        <ui:VisualElement name="bet-type-section" class="section">
+            <ui:Label text="Bet Type" class="section-title" />
+            <ui:DropdownField name="bet-type-dropdown" label="Select Bet Type" class="bet-type-dropdown" />
+        </ui:VisualElement>
+
+        <!-- Horse Selection (Toggles) -->
+        <ui:VisualElement name="horse-selection-section" class="section">
+            <ui:Label text="Select Horses" class="section-title" />
+            <ui:VisualElement name="horse-selection-list" class="horse-selection-list">
+                <ui:Toggle name="horse-toggle-0" label="Horse 1" class="horse-toggle" />
+                <ui:Toggle name="horse-toggle-1" label="Horse 2" class="horse-toggle" />
+                <ui:Toggle name="horse-toggle-2" label="Horse 3" class="horse-toggle" />
+                <ui:Toggle name="horse-toggle-3" label="Horse 4" class="horse-toggle" />
+                <ui:Toggle name="horse-toggle-4" label="Horse 5" class="horse-toggle" />
+                <ui:Toggle name="horse-toggle-5" label="Horse 6" class="horse-toggle" />
+                <ui:Toggle name="horse-toggle-6" label="Horse 7" class="horse-toggle" />
+                <ui:Toggle name="horse-toggle-7" label="Horse 8" class="horse-toggle" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Bet Amount Input -->
+        <ui:VisualElement name="amount-section" class="section">
+            <ui:IntegerField name="bet-amount-input" label="Bet Amount" value="100" class="bet-amount-input" />
+        </ui:VisualElement>
+
+        <!-- Error Message -->
+        <ui:Label name="error-label" text="" class="error-label hidden" />
+
+        <!-- Action Buttons -->
+        <ui:VisualElement name="buttons-section" class="buttons-section">
+            <ui:Button name="confirm-bet-button" text="Confirm Bet" class="confirm-button" />
+            <ui:Button name="done-betting-button" text="Done Betting" class="done-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

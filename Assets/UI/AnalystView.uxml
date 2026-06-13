@@ -1,0 +1,54 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="AnalystView.uss" />
+
+    <ui:VisualElement name="analyst-view-root" class="analyst-view-root">
+
+        <!-- Header -->
+        <ui:VisualElement name="analyst-header" class="analyst-header">
+            <ui:Label name="analyst-title" text="Analyst Intelligence" class="analyst-title" />
+        </ui:VisualElement>
+
+        <!-- Balance HUD -->
+        <ui:VisualElement name="analyst-hud" class="analyst-hud">
+            <ui:VisualElement name="analyst-balance-container" class="analyst-hud-item">
+                <ui:Label text="Balance:" class="analyst-hud-label" />
+                <ui:Label name="analyst-balance-value" text="$1000" class="analyst-balance-value" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Senior Analyst Section -->
+        <ui:VisualElement name="senior-analyst-section" class="analyst-section">
+            <ui:VisualElement name="senior-analyst-info" class="analyst-info">
+                <ui:Label name="senior-analyst-name" text="Senior Analyst" class="analyst-name" />
+                <ui:Label name="senior-analyst-accuracy" text="High accuracy" class="analyst-accuracy" />
+                <ui:Label name="senior-analyst-price" text="$200" class="analyst-price" />
+            </ui:VisualElement>
+            <ui:Button name="senior-buy-button" text="Buy" class="analyst-buy-button" />
+        </ui:VisualElement>
+
+        <!-- Junior Analyst Section -->
+        <ui:VisualElement name="junior-analyst-section" class="analyst-section">
+            <ui:VisualElement name="junior-analyst-info" class="analyst-info">
+                <ui:Label name="junior-analyst-name" text="Junior Analyst" class="analyst-name" />
+                <ui:Label name="junior-analyst-accuracy" text="Moderate accuracy" class="analyst-accuracy" />
+                <ui:Label name="junior-analyst-price" text="$80" class="analyst-price" />
+            </ui:VisualElement>
+            <ui:Button name="junior-buy-button" text="Buy" class="analyst-buy-button" />
+        </ui:VisualElement>
+
+        <!-- Revealed Intel Section -->
+        <ui:VisualElement name="analyst-intel-section" class="analyst-intel-section hidden">
+            <ui:Label text="Purchased Intel" class="analyst-section-title" />
+            <ui:VisualElement name="analyst-intel-list" class="analyst-intel-list">
+                <!-- Intel entries populated dynamically -->
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Error Message -->
+        <ui:Label name="analyst-error-message" text="" class="analyst-error-message hidden" />
+
+        <!-- Continue Button -->
+        <ui:Button name="analyst-continue-button" text="Continue" class="analyst-continue-button" />
+
+    </ui:VisualElement>
+</ui:UXML>

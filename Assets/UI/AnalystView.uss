@@ -1,0 +1,181 @@
+/* Analyst View Root */
+.analyst-view-root {
+    flex-grow: 1;
+    padding: 16px;
+    background-color: rgb(30, 30, 40);
+}
+
+/* Header */
+.analyst-header {
+    padding: 8px 16px;
+    margin-bottom: 12px;
+    background-color: rgb(40, 40, 55);
+    border-radius: 6px;
+    align-items: center;
+}
+
+.analyst-title {
+    font-size: 22px;
+    color: rgb(255, 215, 0);
+    -unity-font-style: bold;
+}
+
+/* HUD */
+.analyst-hud {
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+    background-color: rgb(45, 45, 60);
+    border-radius: 6px;
+}
+
+.analyst-hud-item {
+    flex-direction: row;
+    align-items: center;
+}
+
+.analyst-hud-label {
+    font-size: 14px;
+    color: rgb(180, 180, 200);
+    margin-right: 6px;
+}
+
+.analyst-balance-value {
+    font-size: 16px;
+    color: rgb(100, 255, 100);
+    -unity-font-style: bold;
+}
+
+/* Analyst Section (Senior / Junior) */
+.analyst-section {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background-color: rgb(38, 38, 50);
+    border-radius: 6px;
+}
+
+.analyst-section:hover {
+    background-color: rgb(45, 45, 60);
+}
+
+.analyst-info {
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.analyst-name {
+    font-size: 15px;
+    color: rgb(180, 220, 255);
+    -unity-font-style: bold;
+}
+
+.analyst-accuracy {
+    font-size: 12px;
+    color: rgb(160, 160, 180);
+    margin-top: 2px;
+}
+
+.analyst-price {
+    font-size: 14px;
+    color: rgb(255, 200, 80);
+    -unity-font-style: bold;
+    margin-top: 4px;
+}
+
+.analyst-buy-button {
+    padding: 6px 14px;
+    background-color: rgb(60, 140, 60);
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+    -unity-font-style: bold;
+    border-width: 0;
+}
+
+.analyst-buy-button:hover {
+    background-color: rgb(80, 170, 80);
+}
+
+.analyst-buy-button:active {
+    background-color: rgb(50, 120, 50);
+}
+
+/* Revealed Intel Section */
+.analyst-intel-section {
+    margin-top: 4px;
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: rgb(38, 38, 50);
+    border-radius: 6px;
+}
+
+.analyst-section-title {
+    font-size: 16px;
+    color: rgb(220, 220, 240);
+    -unity-font-style: bold;
+    margin-bottom: 8px;
+}
+
+.analyst-intel-list {
+    flex-direction: column;
+}
+
+.analyst-intel-entry {
+    padding: 6px 10px;
+    margin-bottom: 4px;
+    background-color: rgb(50, 50, 65);
+    border-radius: 4px;
+}
+
+.analyst-intel-type {
+    font-size: 12px;
+    color: rgb(150, 200, 255);
+    -unity-font-style: bold;
+}
+
+.analyst-intel-content {
+    font-size: 13px;
+    color: rgb(220, 220, 240);
+    margin-top: 2px;
+}
+
+/* Error Message */
+.analyst-error-message {
+    font-size: 14px;
+    color: rgb(255, 100, 100);
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    background-color: rgb(60, 30, 30);
+    border-radius: 4px;
+    -unity-text-align: middle-center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Continue Button */
+.analyst-continue-button {
+    padding: 12px 24px;
+    background-color: rgb(60, 100, 180);
+    border-radius: 6px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    border-width: 0;
+    align-self: center;
+    margin-top: 8px;
+}
+
+.analyst-continue-button:hover {
+    background-color: rgb(80, 120, 200);
+}
+
+.analyst-continue-button:active {
+    background-color: rgb(50, 80, 150);
+}

@@ -1,0 +1,7 @@
+﻿<Solution>
+  <Project Path="HorseBetting.Tests.EditMode.csproj" />
+  <Project Path="HorseBetting.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="HorseBetting.Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+</Solution>

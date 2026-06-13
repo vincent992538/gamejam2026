@@ -1,0 +1,27 @@
+{
+    "name": "HorseBetting.Tests.EditMode",
+    "rootNamespace": "HorseBetting.Tests.EditMode",
+    "references": [
+        "HorseBetting",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "FsCheck.dll",
+        "FsCheck.NUnit.dll",
+        "FSharp.Core.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

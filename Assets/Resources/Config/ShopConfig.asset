@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61dec7beeaec54dcf85e522fa7fa96d0, type: 3}
+  m_Name: ShopConfig
+  m_EditorClassIdentifier: 
+  protectionCards:
+  - cardName: "\u9632\u6ED1\u8E44\u9435"
+    protectsAgainst: "\u99AC\u8E44\u6253\u6ED1"
+    successRate: 0.9
+    price: 150
+  - cardName: "\u8010\u529B\u88DC\u7D66"
+    protectsAgainst: "\u75B2\u52DE"
+    successRate: 0.85
+    price: 120
+  - cardName: "\u64CB\u98A8\u677F"
+    protectsAgainst: "\u5F37\u98A8"
+    successRate: 0.95
+    price: 100

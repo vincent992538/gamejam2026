@@ -1,0 +1,212 @@
+/* SettlementView Styles */
+
+.settlement-root {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: rgb(30, 30, 40);
+}
+
+.title-label {
+    font-size: 32px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: rgb(255, 255, 255);
+    margin-bottom: 16px;
+}
+
+.content-scroll {
+    flex-grow: 1;
+    margin-bottom: 12px;
+}
+
+/* Section Styles */
+.section {
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: rgb(40, 40, 55);
+    border-radius: 6px;
+}
+
+.section-title {
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: rgb(220, 200, 100);
+    margin-bottom: 8px;
+}
+
+/* Ranking Table */
+.ranking-table {
+    flex-direction: column;
+}
+
+.ranking-row {
+    flex-direction: row;
+    padding: 4px 8px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(60, 60, 80);
+}
+
+.ranking-header-row {
+    background-color: rgb(50, 50, 70);
+    -unity-font-style: bold;
+}
+
+.rank-col {
+    width: 40px;
+    color: rgb(200, 200, 200);
+    -unity-text-align: middle-center;
+}
+
+.horse-col {
+    flex-grow: 1;
+    color: rgb(200, 200, 200);
+    -unity-text-align: middle-left;
+}
+
+.speed-col {
+    width: 100px;
+    color: rgb(200, 200, 200);
+    -unity-text-align: middle-right;
+}
+
+/* Speed Breakdown Table */
+.breakdown-table {
+    flex-direction: column;
+}
+
+.breakdown-row {
+    flex-direction: row;
+    padding: 4px 8px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(60, 60, 80);
+}
+
+.breakdown-header-row {
+    background-color: rgb(50, 50, 70);
+    -unity-font-style: bold;
+}
+
+.breakdown-horse-col {
+    width: 80px;
+    color: rgb(200, 200, 200);
+    -unity-text-align: middle-left;
+}
+
+.breakdown-data-col {
+    width: 60px;
+    color: rgb(200, 200, 200);
+    -unity-text-align: middle-center;
+}
+
+/* Bet Results Table */
+.bet-results-table {
+    flex-direction: column;
+}
+
+.bet-row {
+    flex-direction: row;
+    padding: 4px 8px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(60, 60, 80);
+}
+
+.bet-header-row {
+    background-color: rgb(50, 50, 70);
+    -unity-font-style: bold;
+}
+
+.bet-type-col {
+    width: 100px;
+    color: rgb(200, 200, 200);
+    -unity-text-align: middle-left;
+}
+
+.bet-amount-col {
+    width: 80px;
+    color: rgb(200, 200, 200);
+    -unity-text-align: middle-center;
+}
+
+.bet-result-col {
+    width: 80px;
+    -unity-text-align: middle-center;
+}
+
+.bet-payout-col {
+    width: 80px;
+    color: rgb(200, 200, 200);
+    -unity-text-align: middle-right;
+}
+
+.bet-win {
+    color: rgb(80, 220, 80);
+}
+
+.bet-lose {
+    color: rgb(220, 80, 80);
+}
+
+/* Summary Section */
+.summary-section {
+    background-color: rgb(35, 35, 50);
+}
+
+.summary-row {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4px 8px;
+}
+
+.net-profit-row {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top-width: 1px;
+    border-top-color: rgb(80, 80, 100);
+}
+
+.summary-label {
+    font-size: 16px;
+    color: rgb(200, 200, 200);
+}
+
+.summary-value {
+    font-size: 16px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
+
+.winnings-value {
+    color: rgb(80, 220, 80);
+}
+
+.loss-value {
+    color: rgb(220, 180, 80);
+}
+
+.profit-positive {
+    color: rgb(80, 220, 80);
+}
+
+.profit-negative {
+    color: rgb(220, 80, 80);
+}
+
+/* Go to Shop Button */
+.go-to-shop-button {
+    height: 48px;
+    font-size: 20px;
+    -unity-font-style: bold;
+    background-color: rgb(60, 140, 60);
+    color: rgb(255, 255, 255);
+    border-radius: 8px;
+    border-width: 0;
+    margin-top: 8px;
+}
+
+.go-to-shop-button:hover {
+    background-color: rgb(80, 170, 80);
+}
+
+.go-to-shop-button:active {
+    background-color: rgb(50, 120, 50);
+}

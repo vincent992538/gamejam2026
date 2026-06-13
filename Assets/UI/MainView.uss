@@ -1,0 +1,131 @@
+/* Main View Root */
+.main-view-root {
+    flex-grow: 1;
+    padding: 16px;
+    background-color: rgb(30, 30, 40);
+}
+
+/* Header */
+.header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    margin-bottom: 12px;
+    background-color: rgb(40, 40, 55);
+    border-radius: 6px;
+}
+
+.game-title {
+    font-size: 24px;
+    color: rgb(255, 215, 0);
+    -unity-font-style: bold;
+}
+
+.round-label {
+    font-size: 18px;
+    color: rgb(200, 200, 220);
+}
+
+/* HUD Bar */
+.hud-bar {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+    background-color: rgb(45, 45, 60);
+    border-radius: 6px;
+}
+
+.hud-item {
+    flex-direction: row;
+    align-items: center;
+}
+
+.hud-label {
+    font-size: 14px;
+    color: rgb(180, 180, 200);
+    margin-right: 6px;
+}
+
+.balance-value {
+    font-size: 16px;
+    color: rgb(100, 255, 100);
+    -unity-font-style: bold;
+}
+
+.cards-count-value {
+    font-size: 16px;
+    color: rgb(150, 200, 255);
+    -unity-font-style: bold;
+}
+
+/* Section */
+.section {
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: rgb(38, 38, 50);
+    border-radius: 6px;
+}
+
+.section-title {
+    font-size: 16px;
+    color: rgb(220, 220, 240);
+    -unity-font-style: bold;
+    margin-bottom: 8px;
+}
+
+/* Horse List */
+.horse-list {
+    flex-direction: column;
+}
+
+.horse-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    margin-bottom: 4px;
+    background-color: rgb(50, 50, 65);
+    border-radius: 4px;
+}
+
+.horse-item:hover {
+    background-color: rgb(60, 60, 80);
+}
+
+.horse-name {
+    font-size: 14px;
+    color: rgb(230, 230, 245);
+}
+
+.horse-odds {
+    font-size: 14px;
+    color: rgb(255, 200, 80);
+    -unity-font-style: bold;
+}
+
+/* Protection Cards List */
+.protection-cards-list {
+    flex-direction: column;
+}
+
+.no-cards-label {
+    font-size: 13px;
+    color: rgb(120, 120, 140);
+    -unity-font-style: italic;
+}
+
+.protection-card-item {
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 12px;
+    margin-bottom: 4px;
+    background-color: rgb(50, 55, 70);
+    border-radius: 4px;
+}
+
+.protection-card-name {
+    font-size: 14px;
+    color: rgb(180, 220, 255);
+}

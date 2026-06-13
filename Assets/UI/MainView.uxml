@@ -1,0 +1,72 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <Style src="MainView.uss" />
+
+    <ui:VisualElement name="main-view-root" class="main-view-root">
+
+        <!-- Header -->
+        <ui:VisualElement name="header" class="header">
+            <ui:Label name="game-title" text="Horse Betting Simulator" class="game-title" />
+            <ui:Label name="round-label" text="Round 1" class="round-label" />
+        </ui:VisualElement>
+
+        <!-- HUD Bar -->
+        <ui:VisualElement name="hud-bar" class="hud-bar">
+            <ui:VisualElement name="balance-container" class="hud-item">
+                <ui:Label text="Balance:" class="hud-label" />
+                <ui:Label name="balance-value" text="$1000" class="balance-value" />
+            </ui:VisualElement>
+            <ui:VisualElement name="cards-count-container" class="hud-item">
+                <ui:Label text="Protection Cards:" class="hud-label" />
+                <ui:Label name="cards-count-value" text="0 / 3" class="cards-count-value" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Horse List -->
+        <ui:VisualElement name="horse-list-section" class="section">
+            <ui:Label text="Horses" class="section-title" />
+            <ui:VisualElement name="horse-list" class="horse-list">
+                <ui:VisualElement name="horse-item-0" class="horse-item">
+                    <ui:Label name="horse-name-0" text="Horse 1" class="horse-name" />
+                    <ui:Label name="horse-odds-0" text="x1.5" class="horse-odds" />
+                </ui:VisualElement>
+                <ui:VisualElement name="horse-item-1" class="horse-item">
+                    <ui:Label name="horse-name-1" text="Horse 2" class="horse-name" />
+                    <ui:Label name="horse-odds-1" text="x2.0" class="horse-odds" />
+                </ui:VisualElement>
+                <ui:VisualElement name="horse-item-2" class="horse-item">
+                    <ui:Label name="horse-name-2" text="Horse 3" class="horse-name" />
+                    <ui:Label name="horse-odds-2" text="x3.0" class="horse-odds" />
+                </ui:VisualElement>
+                <ui:VisualElement name="horse-item-3" class="horse-item">
+                    <ui:Label name="horse-name-3" text="Horse 4" class="horse-name" />
+                    <ui:Label name="horse-odds-3" text="x5.0" class="horse-odds" />
+                </ui:VisualElement>
+                <ui:VisualElement name="horse-item-4" class="horse-item">
+                    <ui:Label name="horse-name-4" text="Horse 5" class="horse-name" />
+                    <ui:Label name="horse-odds-4" text="x8.0" class="horse-odds" />
+                </ui:VisualElement>
+                <ui:VisualElement name="horse-item-5" class="horse-item">
+                    <ui:Label name="horse-name-5" text="Horse 6" class="horse-name" />
+                    <ui:Label name="horse-odds-5" text="x12.0" class="horse-odds" />
+                </ui:VisualElement>
+                <ui:VisualElement name="horse-item-6" class="horse-item">
+                    <ui:Label name="horse-name-6" text="Horse 7" class="horse-name" />
+                    <ui:Label name="horse-odds-6" text="x20.0" class="horse-odds" />
+                </ui:VisualElement>
+                <ui:VisualElement name="horse-item-7" class="horse-item">
+                    <ui:Label name="horse-name-7" text="Horse 8" class="horse-name" />
+                    <ui:Label name="horse-odds-7" text="x40.0" class="horse-odds" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Protection Cards Section -->
+        <ui:VisualElement name="protection-cards-section" class="section">
+            <ui:Label text="Held Protection Cards" class="section-title" />
+            <ui:VisualElement name="protection-cards-list" class="protection-cards-list">
+                <ui:Label name="no-cards-label" text="No protection cards held" class="no-cards-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>
