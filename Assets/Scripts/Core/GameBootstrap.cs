@@ -73,41 +73,57 @@ namespace HorseBetting.Core
 
         private void WireViewsToFlowController()
         {
+            // Temporarily enable all UIDocuments to access rootVisualElement
+            EnableAllDocuments(true);
+
             // Create view controllers and initialize them with UIDocument roots
-            if (_mainUIDocument != null)
+            if (_mainUIDocument != null && _mainUIDocument.rootVisualElement != null)
             {
                 var mainView = new MainView();
                 mainView.Initialize(_mainUIDocument.rootVisualElement);
                 _flowController.SetMainView(mainView);
             }
 
-            if (_bettingUIDocument != null)
+            if (_bettingUIDocument != null && _bettingUIDocument.rootVisualElement != null)
             {
                 var bettingView = new BettingView();
                 bettingView.Initialize(_bettingUIDocument.rootVisualElement);
                 _flowController.SetBettingView(bettingView);
             }
 
-            if (_settlementUIDocument != null)
+            if (_settlementUIDocument != null && _settlementUIDocument.rootVisualElement != null)
             {
                 var settlementView = new SettlementView();
                 settlementView.Initialize(_settlementUIDocument.rootVisualElement);
                 _flowController.SetSettlementView(settlementView);
             }
 
-            if (_shopUIDocument != null)
+            if (_shopUIDocument != null && _shopUIDocument.rootVisualElement != null)
             {
                 var shopView = new ShopView();
                 shopView.Initialize(_shopUIDocument.rootVisualElement);
                 _flowController.SetShopView(shopView);
             }
 
-            if (_analystUIDocument != null)
+            if (_analystUIDocument != null && _analystUIDocument.rootVisualElement != null)
             {
                 var analystView = new AnalystView();
                 analystView.Initialize(_analystUIDocument.rootVisualElement);
                 _flowController.SetAnalystView(analystView);
             }
+
+            // Restore: disable all except main (UIManager will handle switching)
+            EnableAllDocuments(false);
+            if (_mainUIDocument != null) _mainUIDocument.enabled = true;
+        }
+
+        private void EnableAllDocuments(bool enabled)
+        {
+            if (_mainUIDocument != null) _mainUIDocument.enabled = enabled;
+            if (_bettingUIDocument != null) _bettingUIDocument.enabled = enabled;
+            if (_settlementUIDocument != null) _settlementUIDocument.enabled = enabled;
+            if (_shopUIDocument != null) _shopUIDocument.enabled = enabled;
+            if (_analystUIDocument != null) _analystUIDocument.enabled = enabled;
         }
 
         /// <summary>
