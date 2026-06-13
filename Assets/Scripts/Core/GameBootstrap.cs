@@ -268,10 +268,13 @@ namespace HorseBetting.Core
                 _gameEngine.PlayerState.AddBet(bet);
                 _bettingView?.UpdateBalance(_gameEngine.PlayerState.Balance);
                 _bettingView?.HideError();
+                _mainView?.UpdateBalance(_gameEngine.PlayerState.Balance);
+                Debug.Log($"[GameBootstrap] Bet placed: {bet.type} ${bet.amount} on horses [{string.Join(",", bet.selectedHorses)}]. Balance: ${_gameEngine.PlayerState.Balance}");
             }
             else
             {
                 _bettingView?.ShowError(result.errorMessage);
+                Debug.Log($"[GameBootstrap] Bet rejected: {result.errorMessage}");
             }
         }
 
