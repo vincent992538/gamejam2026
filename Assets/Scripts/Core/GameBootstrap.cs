@@ -81,6 +81,18 @@ namespace HorseBetting.Core
 
         // ─── State Machine Control ──────────────────────────────────────────────
 
+        private bool _needsResume = false;
+
+        private void Update()
+        {
+            // Check if we need to resume auto-steps (deferred from HandleStepCompleted)
+            if (_needsResume && !_isRunningAutoSteps)
+            {
+                _needsResume = false;
+                RunAutoSteps();
+            }
+        }
+
         private void HandleStepCompleted(RoundStep step)
         {
             // Push data to UI based on which step just completed
@@ -89,9 +101,7 @@ namespace HorseBetting.Core
             // Only resume after WAITING steps complete (player input steps)
             if (!_isRunningAutoSteps && IsWaitingStep(step))
             {
-                // Cancel any pending resume calls to prevent duplicates
-                CancelInvoke(nameof(ResumeAfterInput));
-                Invoke(nameof(ResumeAfterInput), 0.1f);
+                _needsResume = true;
             }
         }
 
@@ -103,12 +113,6 @@ namespace HorseBetting.Core
                 || step == RoundStep.BuyAnalyst
                 || step == RoundStep.Settlement
                 || step == RoundStep.Shop;
-        }
-
-        private void ResumeAfterInput()
-        {
-            if (_isRunningAutoSteps) return; // extra safety
-            RunAutoSteps();
         }
 
         private void HandleRoundStarted(int roundNumber)

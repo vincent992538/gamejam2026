@@ -67,7 +67,7 @@ namespace HorseBetting.Systems
         public void UpdateOddsAfterBetting(int bettingRound)
         {
             if (_currentOdds == null || _currentHorses == null)
-                throw new InvalidOperationException("Odds have not been calculated yet. Call CalculateOdds first.");
+                return; // silently skip if not initialized
 
             // Recalculate odds for the next round
             int nextRound = bettingRound + 1;
