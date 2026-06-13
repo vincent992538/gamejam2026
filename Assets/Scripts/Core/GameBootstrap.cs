@@ -83,11 +83,21 @@ namespace HorseBetting.Core
             // Push data to UI based on which step just completed
             ProcessStepCompletion(step);
 
-            // Resume auto-stepping if not already running
-            if (!_isRunningAutoSteps)
+            // Only resume after WAITING steps complete (player input steps)
+            // Auto-steps are already handled by RunAutoSteps loop
+            if (!_isRunningAutoSteps && IsWaitingStep(step))
             {
                 Invoke(nameof(ResumeAfterInput), 0.05f);
             }
+        }
+
+        private bool IsWaitingStep(RoundStep step)
+        {
+            return step == RoundStep.BettingRound1
+                || step == RoundStep.BettingRound2
+                || step == RoundStep.BettingRound3
+                || step == RoundStep.BuyAnalyst
+                || step == RoundStep.Shop;
         }
 
         private void HandleRoundStarted(int roundNumber)
